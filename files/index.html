@@ -6,7 +6,6 @@
   <title>BebeSes – Bebek Ses Monitörü</title>
   <meta name="description" content="Yapay zeka destekli bebek sesi analiz ve ebeveyn kontrol paneli" />
 
-  <!-- WCAG: skip link -->
   <a href="#main-content" class="skip-link">Ana içeriğe geç</a>
 
   <style>
@@ -28,8 +27,6 @@
       --radius:   12px;
       --radius-sm: 8px;
       --font-body: 'Segoe UI', system-ui, sans-serif;
-
-      /* WCAG contrast: all text on backgrounds ≥ 4.5:1 */
     }
 
     /* ─── RESET & BASE ──────────────────────────────────── */
@@ -170,7 +167,6 @@
       background: rgba(110,231,183,0.1);
       color: var(--accent);
     }
-    /* WCAG: visible focus */
     .nav-item:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
@@ -439,7 +435,6 @@
     .setting-name { font-weight: 600; font-size: 0.9rem; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .setting-desc { font-size: 0.78rem; color: var(--subtle); }
 
-    /* Toggle Switch — WCAG: keyboard operable, role switch */
     .toggle-wrap { display: flex; align-items: center; gap: 8px; }
     .toggle {
       position: relative;
@@ -471,7 +466,6 @@
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
-    .toggle-label { font-size: 0.8rem; color: var(--subtle); }
 
     /* ─── TOAST BİLDİRİMİ ───────────────────────────────── */
     .toast-container {
@@ -508,7 +502,6 @@
       color: var(--subtle); font-size: 1rem; padding: 2px;
       line-height: 1;
     }
-    .toast-close:focus-visible { outline: 2px solid var(--accent); border-radius: 2px; }
 
     /* ─── BUTONLAR ──────────────────────────────────────── */
     .btn {
@@ -523,16 +516,10 @@
       text-decoration: none;
     }
     .btn:hover { opacity: 0.85; }
-    .btn:active { transform: scale(0.97); }
-    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .btn-primary { background: var(--accent); color: var(--night); }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
-    .btn-danger  { background: rgba(248,113,113,0.15); border: 1px solid var(--alert); color: var(--alert); }
 
-    /* ─── N8N WEBHOOK PANEL ─────────────────────────────── */
-    .webhook-url-wrap {
-      display: flex; gap: 8px; margin-top: 12px;
-    }
+    .webhook-url-wrap { display: flex; gap: 8px; margin-top: 12px; }
     .webhook-input {
       flex: 1;
       background: var(--deep);
@@ -540,16 +527,9 @@
       border-radius: var(--radius-sm);
       padding: 9px 14px;
       color: var(--text);
-      font-size: 0.85rem;
       font-family: monospace;
     }
-    .webhook-input:focus {
-      outline: 2px solid var(--accent);
-      border-color: transparent;
-    }
-    .channel-pills {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
-    }
+    .channel-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
     .pill {
       padding: 5px 12px;
       border-radius: 100px;
@@ -559,16 +539,9 @@
       border: 1px solid var(--border);
       background: var(--deep);
       color: var(--subtle);
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
-    .pill.active {
-      background: rgba(110,231,183,0.12);
-      color: var(--accent);
-      border-color: rgba(110,231,183,0.4);
-    }
-    .pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .pill.active { background: rgba(110,231,183,0.12); color: var(--accent); border-color: rgba(110,231,183,0.4); }
 
-    /* ─── FOOTER ────────────────────────────────────────── */
     footer {
       grid-column: 1 / -1;
       background: var(--deep);
@@ -579,51 +552,22 @@
       color: var(--muted);
     }
 
-    /* ─── RESPONSIVE ────────────────────────────────────── */
     @media (max-width: 768px) {
-      .app-shell {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto 1fr auto;
-      }
-      nav {
-        grid-row: 2;
-        flex-direction: row;
-        padding: 8px;
-        overflow-x: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
+      .app-shell { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; }
+      nav { grid-row: 2; flex-direction: row; padding: 8px; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
       .nav-label { display: none; }
       .nav-item { flex-direction: column; gap: 4px; font-size: 0.7rem; padding: 8px 10px; white-space: nowrap; }
       main { grid-row: 3; padding: 16px; }
       footer { grid-row: 4; }
       .status-card { flex-direction: column; }
-      .waveform { margin-left: 0; }
     }
 
-    /* ─── REDUCED MOTION ────────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        transition-duration: 0.001ms !important;
-      }
-    }
-
-    /* ─── HIGH CONTRAST ─────────────────────────────────── */
-    @media (forced-colors: active) {
-      .card, .stat-card, .log-item, .setting-row { border: 2px solid ButtonText; }
-    }
-
-    /* ─── İSTATİSTİK RENK YARDIMCILARI ─────────────────── */
     .text-accent { color: var(--accent); }
     .text-warn   { color: var(--warn); }
     .text-alert  { color: var(--alert); }
     .text-blue   { color: var(--blue); }
-
-    /* ─── SEPARATOR ─────────────────────────────────────── */
     .sep { height: 1px; background: var(--border); margin: 4px 0; }
 
-    /* ─── EMPTY STATE ───────────────────────────────────── */
     .empty-state {
       text-align: center;
       padding: 32px 16px;
@@ -632,12 +576,8 @@
     }
     .empty-icon { font-size: 2.5rem; }
     .empty-title { font-size: 0.95rem; font-weight: 600; }
-    .empty-desc { font-size: 0.82rem; }
 
-    /* ─── İLERLEME HALKASI ──────────────────────────────── */
-    .ring-wrap {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-    }
+    .ring-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .ring-svg { transform: rotate(-90deg); }
     .ring-bg { fill: none; stroke: var(--border); stroke-width: 6; }
     .ring-fill { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
@@ -646,67 +586,49 @@
 </head>
 
 <body>
-  <!-- WCAG: Live region for screen readers -->
-  <div aria-live="assertive" aria-atomic="true" id="sr-announce" class="visually-hidden"
-       style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"></div>
+  <div aria-live="assertive" aria-atomic="true" id="sr-announce" class="visually-hidden" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"></div>
 
   <div class="app-shell">
-
-    <!-- ══════════════ HEADER ══════════════ -->
     <header role="banner">
-      <a href="#" class="logo" aria-label="BebeSes Ana Sayfa">
-        <span class="logo-icon" aria-hidden="true">👶</span>
-        BebeSes
+      <a href="#" class="logo">
+        <span class="logo-icon" aria-hidden="true">👶</span> BebeSes
       </a>
-
       <div class="header-right">
-        <div class="badge-live" aria-label="Sistem çalışıyor">
-          <span class="dot" aria-hidden="true"></span>
-          Çevrimiçi
+        <div class="badge-live">
+          <span class="dot"></span> Çevrimiçi
         </div>
-        <button class="btn btn-outline" onclick="testAlert()" aria-label="Uyarı bildirimi test et">
-          🔔 Test
-        </button>
+        <button class="btn btn-outline" onclick="testAlert()">🔔 Test</button>
       </div>
     </header>
 
-    <!-- ══════════════ SIDEBAR NAV ══════════════ -->
     <nav role="navigation" aria-label="Ana menü">
-      <span class="nav-label" aria-hidden="true">İzleme</span>
-      <button class="nav-item active" onclick="showPage('monitor', this)"
-              aria-current="page" id="nav-monitor">
-        <span class="nav-icon" aria-hidden="true">📡</span>Anlık Monitör
+      <span class="nav-label">İzleme</span>
+      <button class="nav-item active" onclick="showPage('monitor', this)" aria-current="page" id="nav-monitor">
+        <span class="nav-icon">📡</span>Anlık Monitör
       </button>
       <button class="nav-item" onclick="showPage('log', this)" id="nav-log">
-        <span class="nav-icon" aria-hidden="true">📋</span>Geçmiş Kayıtlar
+        <span class="nav-icon">📋</span>Geçmiş Kayıtlar
       </button>
-
-      <div class="sep" role="separator"></div>
-      <span class="nav-label" aria-hidden="true">Yönetim</span>
-
-      <button class="nav-item" onclick="showPage('notifications', this)" id="nav-notifications">
-        <span class="nav-icon" aria-hidden="true">🔔</span>Bildirimler
+      <div class="sep"></div>
+      <span class="nav-label">Yönetim</span>
+      <button class="nav-item" onclick="showPage('notifications', this)">
+        <span class="nav-icon">🔔</span>Bildirimler
       </button>
-      <button class="nav-item" onclick="showPage('settings', this)" id="nav-settings">
-        <span class="nav-icon" aria-hidden="true">⚙️</span>Ayarlar
+      <button class="nav-item" onclick="showPage('settings', this)">
+        <span class="nav-icon">⚙️</span>Ayarlar
       </button>
     </nav>
 
-    <!-- ══════════════ MAIN ══════════════ -->
     <main id="main-content" role="main">
-
-      <!-- ━━━━━━ SAYFA 1: ANLK MONİTÖR ━━━━━━ -->
-      <section id="page-monitor" class="page active" aria-labelledby="monitor-heading">
+      <section id="page-monitor" class="page active">
         <div class="section-header">
-          <h1 id="monitor-heading" class="section-title">📡 Anlık Bebek Monitörü</h1>
-          <span class="section-sub" id="last-update" aria-live="polite">Son analiz: —</span>
+          <h1 class="section-title">📡 Anlık Bebek Monitörü</h1>
+          <span class="section-sub" id="last-update">Son analiz: —</span>
         </div>
 
-        <!-- Durum Kartı -->
-        <div class="status-card calm" id="status-card"
-             role="status" aria-label="Bebek durumu" aria-live="polite">
+        <div class="status-card calm" id="status-card">
           <div class="status-left">
-            <span class="status-emoji" id="status-emoji" aria-hidden="true">😴</span>
+            <span class="status-emoji" id="status-emoji">😴</span>
             <span class="status-label">Şu anki durum</span>
             <span class="status-main calm" id="status-main">Sakin / Uyuyor</span>
             <span class="status-meta" id="status-meta">Mikrofonu başlat ve analizi dene</span>
@@ -714,385 +636,152 @@
 
           <div class="confidence-bar-wrap">
             <span class="confidence-label">Model güveni</span>
-            <div class="confidence-bar" role="progressbar"
-                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                 aria-label="Model tahmin güveni">
+            <div class="confidence-bar">
               <div class="confidence-fill" id="conf-fill" style="width:0%"></div>
             </div>
             <span class="confidence-pct" id="conf-pct">—</span>
 
-            <!-- Gelişim Halkası -->
             <div class="ring-wrap" style="margin-top:8px">
-              <svg class="ring-svg" width="70" height="70" viewBox="0 0 70 70"
-                   role="img" aria-label="Güven oranı halkası">
+              <svg class="ring-svg" width="70" height="70" viewBox="0 0 70 70">
                 <circle class="ring-bg" cx="35" cy="35" r="29" />
-                <circle class="ring-fill" cx="35" cy="35" r="29"
-                        id="ring-circle"
-                        stroke="var(--accent)"
-                        stroke-dasharray="182"
-                        stroke-dashoffset="182" />
+                <circle class="ring-fill" cx="35" cy="35" r="29" id="ring-circle" stroke="var(--accent)" stroke-dasharray="182" stroke-dashoffset="182" />
               </svg>
               <span class="ring-label">Güven</span>
             </div>
           </div>
         </div>
 
-        <!-- Mikrofon Kontrolü -->
         <div class="card">
           <div class="section-header">
             <h2 class="section-title" style="font-size:0.95rem">🎙️ Ses Algılama</h2>
           </div>
           <div class="mic-section" style="margin-top:14px">
-            <button class="btn-mic off" id="mic-btn"
-                    onclick="toggleMic()"
-                    aria-label="Mikrofonu başlat"
-                    aria-pressed="false">
-              🎤
-            </button>
+            <button class="btn-mic off" id="mic-btn" onclick="toggleMic()">🎤</button>
             <div class="mic-info">
               <span class="mic-status-text" id="mic-status-text">Mikrofon kapalı</span>
               <span class="mic-hint" id="mic-hint">Başlatmak için butona bas</span>
             </div>
-            <div class="waveform" id="waveform" aria-hidden="true">
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
-              <div class="wave-bar"></div>
+            <div class="waveform" id="waveform">
+              <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
             </div>
           </div>
         </div>
 
-        <!-- Sınıf Olasılıkları -->
         <div class="card">
           <div class="section-header">
             <h2 class="section-title" style="font-size:0.95rem">🧠 Yapay Zeka Tahmin Dağılımı</h2>
-            <span class="section-sub">uyku_bebek.h5 modeli</span>
           </div>
-          <div class="prob-list" id="prob-list" style="margin-top:16px" aria-label="Sınıf olasılıkları">
-            <!-- JS ile doldurulur -->
-          </div>
+          <div class="prob-list" id="prob-list" style="margin-top:16px"></div>
         </div>
 
-        <!-- Günlük İstatistikler -->
         <div>
           <h2 class="section-title" style="margin-bottom:12px">📊 Bugünün Özeti</h2>
           <div class="card-grid">
             <div class="stat-card">
-              <span class="stat-icon" aria-hidden="true">😭</span>
+              <span class="stat-icon">😭</span>
               <span class="stat-label">Ağlama Olayı</span>
               <span class="stat-value text-alert" id="stat-cry">0</span>
-              <span class="stat-sub">bugün</span>
             </div>
             <div class="stat-card">
-              <span class="stat-icon" aria-hidden="true">🍼</span>
+              <span class="stat-icon">🍼</span>
               <span class="stat-label">Açlık Tespiti</span>
               <span class="stat-value text-warn" id="stat-hungry">0</span>
-              <span class="stat-sub">bugün</span>
             </div>
             <div class="stat-card">
-              <span class="stat-icon" aria-hidden="true">😴</span>
+              <span class="stat-icon">😴</span>
               <span class="stat-label">Sakin Süre</span>
               <span class="stat-value text-accent" id="stat-calm">0</span>
-              <span class="stat-sub">dakika</span>
             </div>
             <div class="stat-card">
-              <span class="stat-icon" aria-hidden="true">📤</span>
+              <span class="stat-icon">📤</span>
               <span class="stat-label">Gönderilen Bildirim</span>
               <span class="stat-value text-blue" id="stat-notif">0</span>
-              <span class="stat-sub">bugün</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ━━━━━━ SAYFA 2: GEÇMİŞ KAYITLAR ━━━━━━ -->
-      <section id="page-log" class="page" aria-labelledby="log-heading">
+      <section id="page-log" class="page">
         <div class="section-header">
-          <h1 id="log-heading" class="section-title">📋 Geçmiş Kayıtlar</h1>
-          <button class="btn btn-outline" onclick="clearLog()"
-                  aria-label="Tüm kayıtları temizle">🗑️ Temizle</button>
+          <h1 class="section-title">📋 Geçmiş Kayıtlar</h1>
+          <button class="btn btn-outline" onclick="clearLog()">🗑️ Temizle</button>
         </div>
-
         <div class="card">
-          <div class="log-list" id="log-list" aria-live="polite" aria-label="Olay kayıtları">
-            <div class="empty-state">
-              <span class="empty-icon" aria-hidden="true">🌙</span>
-              <span class="empty-title">Henüz kayıt yok</span>
-              <span class="empty-desc">Monitörü başlatınca olaylar burada görünecek</span>
-            </div>
+          <div class="log-list" id="log-list">
+            <div class="empty-state"><span class="empty-icon">🌙</span><span class="empty-title">Henüz kayıt yok</span></div>
           </div>
         </div>
       </section>
 
-      <!-- ━━━━━━ SAYFA 3: BİLDİRİMLER ━━━━━━ -->
-      <section id="page-notifications" class="page" aria-labelledby="notif-heading">
-        <div class="section-header">
-          <h1 id="notif-heading" class="section-title">🔔 Bildirim Ayarları</h1>
-        </div>
-
-        <!-- n8n Webhook -->
+      <section id="page-notifications" class="page">
+        <div class="section-header"><h1 class="section-title">🔔 Bildirim Ayarları</h1></div>
         <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:8px">
-            ⚡ n8n Webhook Entegrasyonu
-          </h2>
-          <p style="font-size:0.83rem; color:var(--subtle); margin-bottom:4px">
-            n8n'deki "Webhook" nodunun URL'sini buraya yapıştır. Bebek ağladığında otomatik tetiklenir.
-          </p>
+          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:8px">⚡ n8n Webhook Entegrasyonu</h2>
           <div class="webhook-url-wrap">
-            <input type="url" class="webhook-input" id="webhook-url"
-                   placeholder="https://your-n8n.app/webhook/bebek-alert"
-                   aria-label="n8n webhook URL'si"
-                   value="">
-            <button class="btn btn-primary" onclick="saveWebhook()" aria-label="Webhook URL'sini kaydet">
-              Kaydet
-            </button>
-            <button class="btn btn-outline" onclick="testWebhook()" aria-label="Webhook bağlantısını test et">
-              🧪 Test
-            </button>
+            <input type="url" class="webhook-input" id="webhook-url" placeholder="https://your-n8n.app/webhook/bebek-alert">
+            <button class="btn btn-primary" onclick="saveWebhook()">Kaydet</button>
+            <button class="btn btn-outline" onclick="testWebhook()">🧪 Test</button>
           </div>
-
-          <div style="margin-top:16px">
-            <span style="font-size:0.8rem; color:var(--subtle); font-weight:600; display:block; margin-bottom:8px">
-              Bildirim Kanalları (n8n'de yapılandır):
-            </span>
-            <div class="channel-pills" role="group" aria-label="Bildirim kanalları">
-              <button class="pill active" onclick="togglePill(this)" aria-pressed="true">📱 Telegram</button>
-              <button class="pill" onclick="togglePill(this)" aria-pressed="false">📧 E-posta</button>
-              <button class="pill" onclick="togglePill(this)" aria-pressed="false">💬 WhatsApp</button>
-              <button class="pill" onclick="togglePill(this)" aria-pressed="false">📲 SMS</button>
-              <button class="pill" onclick="togglePill(this)" aria-pressed="false">🔔 Push</button>
-            </div>
+          <div class="channel-pills">
+            <button class="pill active" onclick="togglePill(this)">📱 Telegram</button>
+            <button class="pill" onclick="togglePill(this)">💬 WhatsApp</button>
           </div>
         </div>
-
-        <!-- Bildirim Kuralları -->
         <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">
-            📐 Bildirim Kuralları
-          </h2>
+          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">📐 Bildirim Kuralları</h2>
           <div class="settings-grid">
-
             <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">
-                  <span aria-hidden="true">😭</span> Ağlama Uyarısı
-                </span>
-                <span class="setting-desc">Model "ağlıyor" tespit ettiğinde anında bildir</span>
-              </div>
-              <label class="toggle" aria-label="Ağlama uyarısı açık/kapalı">
-                <input type="checkbox" checked id="toggle-cry" role="switch"
-                       onchange="updateNotifPrefs()">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
+              <div class="setting-info"><span class="setting-name">😭 Ağlama Uyarısı</span></div>
+              <label class="toggle"><input type="checkbox" checked id="toggle-cry" onchange="updateNotifPrefs()"><span class="toggle-track"></span></label>
             </div>
-
             <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">
-                  <span aria-hidden="true">🍼</span> Açlık Bildirimi
-                </span>
-                <span class="setting-desc">Açlık nedeniyle ağlarken özel mesaj gönder</span>
-              </div>
-              <label class="toggle" aria-label="Açlık bildirimi açık/kapalı">
-                <input type="checkbox" checked id="toggle-hungry" role="switch"
-                       onchange="updateNotifPrefs()">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
+              <div class="setting-info"><span class="setting-name">🍼 Açlık Bildirimi</span></div>
+              <label class="toggle"><input type="checkbox" checked id="toggle-hungry" onchange="updateNotifPrefs()"><span class="toggle-track"></span></label>
             </div>
-
             <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">
-                  <span aria-hidden="true">😣</span> Gaz/Ağrı Acil Uyarısı
-                </span>
-                <span class="setting-desc">Gaz sancısı veya ağrı sesinde acil bildirim</span>
-              </div>
-              <label class="toggle" aria-label="Gaz ağrı uyarısı açık/kapalı">
-                <input type="checkbox" checked id="toggle-pain" role="switch"
-                       onchange="updateNotifPrefs()">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
-            </div>
-
-            <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">
-                  <span aria-hidden="true">😴</span> Mırıldanma / Normal Ses
-                </span>
-                <span class="setting-desc">Sakin sesler için bildirim gönderme (sadece izle)</span>
-              </div>
-              <label class="toggle" aria-label="Mırıldanma bildirimi açık/kapalı">
-                <input type="checkbox" id="toggle-calm" role="switch"
-                       onchange="updateNotifPrefs()">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
-            </div>
-
-            <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">
-                  <span aria-hidden="true">🌙</span> Gece Modu (22:00–07:00)
-                </span>
-                <span class="setting-desc">Gece saatlerinde sadece acil uyarılar gitsin</span>
-              </div>
-              <label class="toggle" aria-label="Gece modu açık/kapalı">
-                <input type="checkbox" checked id="toggle-night" role="switch"
-                       onchange="updateNotifPrefs()">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- n8n İş Akışı Açıklaması -->
-        <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:12px">
-            🔄 n8n İş Akışı Nasıl Çalışır?
-          </h2>
-          <div style="display:flex; flex-direction:column; gap:10px; font-size:0.85rem; color:var(--subtle)">
-            <div style="display:flex; gap:10px; align-items:flex-start">
-              <span style="background:rgba(110,231,183,0.15); color:var(--accent); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; flex-shrink:0">1</span>
-              <span>Bu panel, model "ağlıyor" dediğinde yukarıdaki webhook URL'sine bir POST isteği gönderir. İçinde: bebek adı, tespit edilen durum, güven oranı ve zaman damgası bulunur.</span>
-            </div>
-            <div style="display:flex; gap:10px; align-items:flex-start">
-              <span style="background:rgba(96,165,250,0.15); color:var(--blue); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; flex-shrink:0">2</span>
-              <span>n8n bu isteği yakalar. "Switch" nodu ile duruma göre (ağlıyor → Telegram, açlık → WhatsApp) farklı kanallara yönlendirir.</span>
-            </div>
-            <div style="display:flex; gap:10px; align-items:flex-start">
-              <span style="background:rgba(167,139,250,0.15); color:var(--purple); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; flex-shrink:0">3</span>
-              <span>Ebeveyn cihazına bildirim ulaşır: "🚨 Ayşe ağlıyor! Tahmin: Açlık (%91). 14:32"</span>
+              <div class="setting-info"><span class="setting-name">😣 Gaz/Ağrı Acil Uyarısı</span></div>
+              <label class="toggle"><input type="checkbox" checked id="toggle-pain" onchange="updateNotifPrefs()"><span class="toggle-track"></span></label>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ━━━━━━ SAYFA 4: AYARLAR ━━━━━━ -->
-      <section id="page-settings" class="page" aria-labelledby="settings-heading">
-        <div class="section-header">
-          <h1 id="settings-heading" class="section-title">⚙️ Uygulama Ayarları</h1>
-        </div>
-
+      <section id="page-settings" class="page">
+        <div class="section-header"><h1 class="section-title">⚙️ Uygulama Ayarları</h1></div>
         <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">
-            👶 Bebek Profili
-          </h2>
+          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">👶 Bebek Profili & API</h2>
           <div class="settings-grid">
             <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">Bebek Adı</span>
-              </div>
-              <input type="text" id="baby-name" value="Bebek"
-                     style="background:var(--deep); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 12px; color:var(--text); font-size:0.85rem; width:140px"
-                     aria-label="Bebek adı"
-                     onchange="saveBabyName(this.value)">
+              <span class="setting-name">Bebek Adı</span>
+              <input type="text" id="baby-name" onchange="saveBabyName(this.value)" style="background:var(--deep); border:1px solid var(--border); padding:7px; color:white; border-radius:4px;">
             </div>
             <div class="setting-row">
               <div class="setting-info">
-                <span class="setting-name"><span aria-hidden="true">📍</span> Backend API URL</span>
-                <span class="setting-desc">Python FastAPI sunucu adresi (Render / Railway)</span>
+                <span class="setting-name">Backend API URL</span>
+                <span class="setting-desc">Örn: https://bebek-projesi.onrender.com</span>
               </div>
-              <input type="url" id="api-url"
-                     style="background:var(--deep); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 12px; color:var(--text); font-size:0.8rem; width:200px; font-family:monospace"
-                     placeholder="https://bebesebes.onrender.com"
-                     aria-label="Backend API URL'si"
-                     onchange="saveApiUrl(this.value)">
+              <input type="url" id="api-url" onchange="saveApiUrl(this.value)" style="background:var(--deep); border:1px solid var(--border); padding:7px; color:white; width:250px; border-radius:4px;">
             </div>
           </div>
-        </div>
-
-        <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">
-            🧠 Model Bilgisi
-          </h2>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:0.85rem">
-            <div>
-              <span style="color:var(--subtle); display:block; margin-bottom:2px">Model Dosyası</span>
-              <span style="font-family:monospace; color:var(--accent)">uyku_bebek.h5</span>
-            </div>
-            <div>
-              <span style="color:var(--subtle); display:block; margin-bottom:2px">Sınıf Etiketleri</span>
-              <span style="font-family:monospace; color:var(--accent)">uyku_bebek_classes.npy</span>
-            </div>
-            <div>
-              <span style="color:var(--subtle); display:block; margin-bottom:2px">Çerçeve</span>
-              <span style="color:var(--text)">TensorFlow / Keras</span>
-            </div>
-            <div>
-              <span style="color:var(--subtle); display:block; margin-bottom:2px">API</span>
-              <span style="color:var(--text)">FastAPI + uvicorn</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 class="section-title" style="font-size:0.95rem; margin-bottom:16px">
-            ♿ Erişilebilirlik
-          </h2>
-          <div class="settings-grid">
-            <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">Animasyonları Azalt</span>
-                <span class="setting-desc">Tüm hareketli efektleri devre dışı bırak</span>
-              </div>
-              <label class="toggle" aria-label="Animasyonları azalt açık/kapalı">
-                <input type="checkbox" id="reduce-motion" role="switch" onchange="applyReduceMotion(this)">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
-            </div>
-            <div class="setting-row">
-              <div class="setting-info">
-                <span class="setting-name">Yüksek Kontrast</span>
-                <span class="setting-desc">Renk kontrastını artır (WCAG AAA)</span>
-              </div>
-              <label class="toggle" aria-label="Yüksek kontrast açık/kapalı">
-                <input type="checkbox" id="high-contrast" role="switch" onchange="applyHighContrast(this)">
-                <span class="toggle-track" aria-hidden="true"></span>
-              </label>
-            </div>
-          </div>
-          <p style="margin-top:14px; font-size:0.78rem; color:var(--subtle)">
-            Bu uygulama WCAG 2.1 AA standartlarına uygun geliştirilmiştir: klavye navigasyonu, 
-            ekran okuyucu etiketleri, yeterli renk kontrastı (≥4.5:1) ve hareket tercihlerine saygı.
-          </p>
         </div>
       </section>
-
     </main>
+  </div>
 
-    <!-- ══════════════ FOOTER ══════════════ -->
-    <footer role="contentinfo">
-      <span>BebeSes v1.0 — Yapay Zeka Bebek Monitörü</span>
-      <span>
-        WCAG 2.1 AA Uyumlu ·
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer"
-           style="color:var(--accent); text-decoration:none"
-           aria-label="GitHub deposu (yeni sekmede açılır)">GitHub</a>
-      </span>
-    </footer>
+  <div class="toast-container" id="toast-container"></div>
 
-  </div><!-- /app-shell -->
-
-  <!-- Toast Container -->
-  <div class="toast-container" id="toast-container" aria-live="polite" aria-label="Bildirimler"></div>
-
-  <!-- ══════════════ JAVASCRIPT ══════════════ -->
   <script>
-    /* ─── GLOBAL STATE ─────────────────────────────── */
     let micActive = false;
-    let monitorInterval = null;
-    let demoInterval = null;
+    let mediaRecorder;
+    let audioChunks = [];
 
     const STATE_CLASSES = {
-      calm:   { emoji:'😴', label:'Sakin / Uyuyor',   cls:'calm',  barColor:'var(--accent)', meta:'Bebek huzurlu.' },
-      hungry: { emoji:'🍼', label:'Ağlıyor — Açlık',  cls:'hungry',barColor:'var(--warn)',   meta:'Bebek aç olabilir. Mama vakti!' },
-      pain:   { emoji:'😣', label:'Ağlıyor — Ağrı',   cls:'crying',barColor:'var(--alert)',  meta:'Gaz sancısı veya ağrı olabilir.' },
-      cry:    { emoji:'😭', label:'Genel Ağlama',      cls:'crying',barColor:'var(--alert)',  meta:'Bebek rahatsız, kontrol et.' },
-      sleep:  { emoji:'💤', label:'Uykuda',            cls:'calm',  barColor:'var(--accent)', meta:'Bebek derin uykuda.' },
+      calm:   { emoji:'😴', label:'Sakin / Uyuyor',  cls:'calm',  barColor:'var(--accent)' },
+      hungry: { emoji:'🍼', label:'Ağlıyor — Açlık', cls:'hungry',barColor:'var(--warn)' },
+      pain:   { emoji:'😣', label:'Ağlıyor — Ağrı',  cls:'crying',barColor:'var(--alert)' },
+      cry:    { emoji:'😭', label:'Genel Ağlama',    cls:'crying',barColor:'var(--alert)' },
+      sleep:  { emoji:'💤', label:'Uykuda',          cls:'calm',  barColor:'var(--accent)' },
     };
 
     const CLASSES = ['calm','sleep','hungry','cry','pain'];
@@ -1101,12 +790,11 @@
     const statsToday = { cry:0, hungry:0, calm:0, notif:0 };
     const logEntries = [];
 
-    let notifPrefs = { cry:true, hungry:true, pain:true, calm:false, night:true };
+    let notifPrefs = { cry:true, hungry:true, pain:true };
     let webhookUrl = localStorage.getItem('bebesebes_webhook') || '';
-    let apiUrl     = localStorage.getItem('bebesebes_api')     || '';
+    let apiUrl     = localStorage.getItem('bebesebes_api')     || 'https://bebek-projesi.onrender.com';
     let babyName   = localStorage.getItem('bebesebes_name')    || 'Bebek';
 
-    /* ─── INIT ──────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('webhook-url').value = webhookUrl;
       document.getElementById('api-url').value     = apiUrl;
@@ -1114,101 +802,103 @@
       renderProbBars(null);
     });
 
-    /* ─── NAVİGASYON ────────────────────────────────── */
     function showPage(name, btn) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => {
-        n.classList.remove('active');
-        n.removeAttribute('aria-current');
-      });
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
       btn.classList.add('active');
-      btn.setAttribute('aria-current', 'page');
     }
 
-    /* ─── MİKROFON TOGGLE ───────────────────────────── */
     function toggleMic() {
       micActive = !micActive;
       const btn = document.getElementById('mic-btn');
       const wf  = document.getElementById('waveform');
 
       if (micActive) {
+        if (!apiUrl) {
+          showToast('Hata', 'Ayarlar sayfasından API Linkini girin.', 'alert');
+          micActive = false;
+          return;
+        }
         btn.classList.replace('off','on');
-        btn.setAttribute('aria-label', 'Mikrofonu durdur');
-        btn.setAttribute('aria-pressed', 'true');
-        document.getElementById('mic-status-text').textContent = 'Dinleniyor…';
-        document.getElementById('mic-hint').textContent        = 'Yapay zeka analiz ediyor';
+        document.getElementById('mic-status-text').textContent = 'Dinleniyor… (5 saniyelik bloklar)';
         wf.classList.add('active');
-        startMonitor();
+        startRealMonitor();
       } else {
         btn.classList.replace('on','off');
-        btn.setAttribute('aria-label', 'Mikrofonu başlat');
-        btn.setAttribute('aria-pressed', 'false');
         document.getElementById('mic-status-text').textContent = 'Mikrofon kapalı';
-        document.getElementById('mic-hint').textContent        = 'Başlatmak için butona bas';
         wf.classList.remove('active');
-        stopMonitor();
+        stopRealMonitor();
       }
     }
 
-    /* ─── MONİTÖR DÖNGÜSÜ ───────────────────────────── */
-    function startMonitor() {
-      // Demo: Backend API yokken simüle et; gerçek deploy'da aşağıdaki fetch bloğu çalışır
-      demoInterval = setInterval(() => {
-        const apiEndpoint = apiUrl || null;
+    async function startRealMonitor() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
 
-        if (apiEndpoint) {
-          // GERÇEK BACKEND ENTEGRASYONU
-          fetch(apiEndpoint + '/predict', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ source: 'live_mic', timestamp: Date.now() })
-          })
-          .then(r => r.json())
-          .then(data => applyPrediction(data.label, data.confidence, data.probabilities))
-          .catch(() => simulateDemo());
-        } else {
-          simulateDemo();
-        }
-      }, 4000);
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        mediaRecorder.onstop = async () => {
+          if(audioChunks.length > 0) {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            audioChunks = [];
+            const formData = new FormData();
+            formData.append('ses_dosyasi', audioBlob, 'canli.webm');
+
+            let fetchUrl = apiUrl.endsWith('/predict/audio') ? apiUrl : apiUrl.replace(/\/$/, '') + '/predict/audio';
+            
+            try {
+              const response = await fetch(fetchUrl, { method: 'POST', body: formData });
+              const data = await response.json();
+              mapBackendDataToFrontend(data);
+            } catch (err) {
+              showToast('Bağlantı Hatası', 'Yapay zeka sunucusuna ulaşılamadı.', 'alert');
+            }
+          }
+          
+          if (micActive) {
+            mediaRecorder.start();
+            setTimeout(() => { if(mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 5000);
+          } else {
+            stream.getTracks().forEach(track => track.stop());
+          }
+        };
+
+        audioChunks = [];
+        mediaRecorder.start();
+        setTimeout(() => { if(mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 5000);
+
+      } catch (err) {
+        showToast('Mikrofon Hatası', 'Mikrofona erişim sağlanamadı.', 'alert');
+        toggleMic();
+      }
     }
 
-    function stopMonitor() {
-      clearInterval(demoInterval);
+    function stopRealMonitor() {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+      }
       resetStatus();
     }
 
-    function simulateDemo() {
-      // Ağırlıklı olasılık dağılımı (gerçekçi demo)
-      const r = Math.random();
-      let cls;
-      if (r < 0.45)      cls = 'calm';
-      else if (r < 0.65) cls = 'sleep';
-      else if (r < 0.80) cls = 'hungry';
-      else if (r < 0.92) cls = 'cry';
-      else               cls = 'pain';
+    function mapBackendDataToFrontend(data) {
+      const backendClass = data.tahmini_neden;
+      let frontendClass = 'calm';
 
-      const confidence = 0.60 + Math.random() * 0.37;
+      if (backendClass === 'bellypain') frontendClass = 'pain';
+      else if (backendClass === 'hungry') frontendClass = 'hungry';
+      else if (backendClass === 'tired') frontendClass = 'sleep';
+      else if (backendClass === 'silence' || backendClass === 'laugh' || backendClass === 'noise') frontendClass = 'calm';
+      else frontendClass = 'cry';
 
-      // Tüm sınıflar için sahte dağılım üret
-      let probs = {};
-      let leftover = 1;
-      const otherCls = CLASSES.filter(c => c !== cls);
-      otherCls.forEach((c, i) => {
-        const v = i === otherCls.length - 1 ? leftover - (1 - confidence) : Math.random() * (leftover * 0.4);
-        probs[c] = parseFloat(v.toFixed(3));
-        leftover -= probs[c];
-      });
-      probs[cls] = parseFloat((1 - confidence + confidence).toFixed(3));
-      // Normalize
-      let sum = Object.values(probs).reduce((a,b) => a+b, 0);
-      CLASSES.forEach(c => probs[c] = (probs[c] || 0) / sum);
-      probs[cls] = confidence;
-      // Re-normalize
-      sum = Object.values(probs).reduce((a,b) => a+b, 0);
-      CLASSES.forEach(c => probs[c] = probs[c] / sum);
+      const confidence = data.neden_olasiligi / 100;
+      
+      let probs = {calm: 0, sleep: 0, hungry: 0, cry: 0, pain: 0};
+      probs[frontendClass] = confidence;
+      let leftover = 1 - confidence;
+      CLASSES.forEach(c => { if(c !== frontendClass) probs[c] = leftover / 4; });
 
-      applyPrediction(cls, confidence, probs);
+      applyPrediction(frontendClass, confidence, probs);
     }
 
     function applyPrediction(cls, confidence, probs) {
@@ -1216,63 +906,33 @@
       const card  = document.getElementById('status-card');
       const pct   = Math.round(confidence * 100);
 
-      // Durum Kartı
       card.className  = 'status-card ' + state.cls;
       document.getElementById('status-emoji').textContent = state.emoji;
       document.getElementById('status-main').textContent  = state.label;
       document.getElementById('status-main').className    = 'status-main ' + (state.cls === 'calm' ? 'calm' : (state.cls === 'hungry' ? 'warn' : 'alert'));
-      document.getElementById('status-meta').textContent  = state.meta;
 
-      // Güven çubuğu & halka
       document.getElementById('conf-fill').style.width = pct + '%';
       document.getElementById('conf-fill').style.background = state.barColor;
       document.getElementById('conf-pct').textContent = pct + '%';
+      
       const ring = document.getElementById('ring-circle');
       ring.style.strokeDashoffset = 182 - (182 * confidence);
       ring.style.stroke = state.barColor;
-      const confBar = document.querySelector('.confidence-bar');
-      confBar.setAttribute('aria-valuenow', pct);
 
-      // Zaman
-      document.getElementById('last-update').textContent =
-        'Son analiz: ' + new Date().toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+      document.getElementById('last-update').textContent = 'Son analiz: ' + new Date().toLocaleTimeString('tr-TR');
 
-      // Olasılık Çubukları
       renderProbBars(probs);
-
-      // İstatistik
-      if (cls === 'cry' || cls === 'pain') {
-        statsToday.cry++;
-        document.getElementById('stat-cry').textContent = statsToday.cry;
-      }
-      if (cls === 'hungry') {
-        statsToday.hungry++;
-        document.getElementById('stat-hungry').textContent = statsToday.hungry;
-      }
-      if (cls === 'calm' || cls === 'sleep') {
-        statsToday.calm++;
-        document.getElementById('stat-calm').textContent = statsToday.calm;
-      }
-
-      // Log Ekle
       addLog(cls, state, pct);
 
-      // SR Duyurusu
-      if (cls === 'cry' || cls === 'pain' || cls === 'hungry') {
-        announce(babyName + ' ' + state.label + ' — Güven: %' + pct);
-      }
+      if (cls === 'cry' || cls === 'pain') { statsToday.cry++; document.getElementById('stat-cry').textContent = statsToday.cry; }
+      if (cls === 'hungry') { statsToday.hungry++; document.getElementById('stat-hungry').textContent = statsToday.hungry; }
+      if (cls === 'calm' || cls === 'sleep') { statsToday.calm++; document.getElementById('stat-calm').textContent = statsToday.calm; }
 
-      // Bildirim
-      const shouldNotify = (notifPrefs[cls] !== false) &&
-        !(notifPrefs.night && isNightTime() && (cls === 'calm' || cls === 'sleep'));
-
+      const shouldNotify = notifPrefs[cls] !== false;
       if (shouldNotify && (cls !== 'calm' && cls !== 'sleep')) {
-        showToast(state.emoji + ' ' + babyName + ' — ' + state.label,
-                  'Güven: %' + pct + ' · ' + new Date().toLocaleTimeString('tr-TR'),
-                  cls === 'pain' ? 'alert' : (cls === 'hungry' ? 'warn' : 'alert'));
+        showToast(state.emoji + ' ' + babyName + ' — ' + state.label, 'Güven: %' + pct, cls === 'pain' ? 'alert' : 'warn');
         sendWebhook(cls, state.label, pct);
-        statsToday.notif++;
-        document.getElementById('stat-notif').textContent = statsToday.notif;
+        statsToday.notif++; document.getElementById('stat-notif').textContent = statsToday.notif;
       }
     }
 
@@ -1282,192 +942,74 @@
       document.getElementById('status-emoji').textContent = '😴';
       document.getElementById('status-main').textContent = 'Sakin / Uyuyor';
       document.getElementById('status-main').className = 'status-main calm';
-      document.getElementById('status-meta').textContent = 'Mikrofonu başlat ve analizi dene';
       document.getElementById('conf-fill').style.width = '0%';
       document.getElementById('conf-pct').textContent = '—';
       document.getElementById('last-update').textContent = 'Son analiz: —';
-      const ring = document.getElementById('ring-circle');
-      ring.style.strokeDashoffset = '182';
+      document.getElementById('ring-circle').style.strokeDashoffset = '182';
     }
 
-    /* ─── OLASILIK ÇUBUKLARI ────────────────────────── */
     const classLabels = { calm:'😴 Sakin', sleep:'💤 Uykuda', hungry:'🍼 Açlık', cry:'😭 Ağlama', pain:'😣 Ağrı/Gaz' };
-
     function renderProbBars(probs) {
       const container = document.getElementById('prob-list');
-      if (!probs) {
-        container.innerHTML = '<div class="empty-state" style="padding:16px 0"><span class="empty-icon">🎙️</span><span class="empty-desc">Analiz başlatılmadı</span></div>';
-        return;
-      }
-      // Sırala
-      const sorted = CLASSES.map((c,i) => ({ key:c, val:probs[c]||0, color:COLORS[i] }))
-                            .sort((a,b) => b.val - a.val);
-
+      if (!probs) { container.innerHTML = '<div class="empty-state">Analiz başlatılmadı</div>'; return; }
+      
+      const sorted = CLASSES.map((c,i) => ({ key:c, val:probs[c]||0, color:COLORS[i] })).sort((a,b) => b.val - a.val);
       container.innerHTML = sorted.map(item => `
-        <div class="prob-item" role="group" aria-label="${classLabels[item.key]}: ${Math.round(item.val*100)}%">
-          <div class="prob-header">
-            <span class="prob-name">${classLabels[item.key]}</span>
-            <span class="prob-pct">${Math.round(item.val*100)}%</span>
-          </div>
-          <div class="prob-bar-track" role="progressbar"
-               aria-valuenow="${Math.round(item.val*100)}"
-               aria-valuemin="0" aria-valuemax="100">
-            <div class="prob-bar-fill" style="width:${Math.round(item.val*100)}%; background:${item.color}"></div>
-          </div>
+        <div class="prob-item">
+          <div class="prob-header"><span class="prob-name">${classLabels[item.key]}</span><span class="prob-pct">${Math.round(item.val*100)}%</span></div>
+          <div class="prob-bar-track"><div class="prob-bar-fill" style="width:${Math.round(item.val*100)}%; background:${item.color}"></div></div>
         </div>
       `).join('');
     }
 
-    /* ─── KAYIT LOG ─────────────────────────────────── */
     function addLog(cls, state, pct) {
       const time = new Date().toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'});
-      const entry = { cls, state, pct, time };
-      logEntries.unshift(entry);
+      logEntries.unshift({ cls, state, pct, time });
       if (logEntries.length > 50) logEntries.pop();
       renderLog();
     }
 
     function renderLog() {
       const container = document.getElementById('log-list');
-      if (!logEntries.length) {
-        container.innerHTML = '<div class="empty-state"><span class="empty-icon">🌙</span><span class="empty-title">Henüz kayıt yok</span><span class="empty-desc">Monitörü başlatınca olaylar burada görünecek</span></div>';
-        return;
-      }
+      if (!logEntries.length) return;
       container.innerHTML = logEntries.map(e => `
         <div class="log-item">
-          <span class="log-icon" aria-hidden="true">${e.state.emoji}</span>
+          <span class="log-icon">${e.state.emoji}</span>
           <div class="log-body">
             <span class="log-title">${e.state.label}</span>
             <span class="log-meta">Güven: %${e.pct} · ${e.time}</span>
           </div>
-          <span class="log-badge ${e.cls === 'calm'||e.cls==='sleep' ? 'calm' : e.cls === 'hungry' ? 'warn' : 'cry'}" aria-label="Olay tipi">
-            ${e.cls.toUpperCase()}
-          </span>
+          <span class="log-badge ${e.cls === 'calm'||e.cls==='sleep' ? 'calm' : e.cls === 'hungry' ? 'warn' : 'cry'}">${e.cls.toUpperCase()}</span>
         </div>
       `).join('');
     }
 
-    function clearLog() {
-      logEntries.length = 0;
-      renderLog();
-      announce('Kayıtlar temizlendi');
-    }
+    function clearLog() { logEntries.length = 0; document.getElementById('log-list').innerHTML = ''; }
 
-    /* ─── TOAST ─────────────────────────────────────── */
     function showToast(title, sub, type = 'info') {
       const container = document.getElementById('toast-container');
       const icons = { alert:'🚨', warn:'⚠️', info:'ℹ️' };
       const toast = document.createElement('div');
       toast.className = 'toast ' + (type === 'alert' ? 'alert-toast' : type === 'warn' ? 'warn-toast' : '');
-      toast.setAttribute('role', 'alert');
-      toast.innerHTML = `
-        <span class="toast-icon" aria-hidden="true">${icons[type]||'ℹ️'}</span>
-        <div class="toast-body">
-          <div class="toast-title">${title}</div>
-          <div class="toast-sub">${sub}</div>
-        </div>
-        <button class="toast-close" onclick="this.parentElement.remove()" aria-label="Bildirimi kapat">✕</button>
-      `;
+      toast.innerHTML = `<span class="toast-icon">${icons[type]||'ℹ️'}</span><div class="toast-body"><div class="toast-title">${title}</div><div class="toast-sub">${sub}</div></div><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
       container.appendChild(toast);
       setTimeout(() => toast.remove(), 6000);
     }
 
-    function testAlert() {
-      showToast('🚨 ' + babyName + ' — Genel Ağlama', 'Test bildirimi · %87 güven', 'alert');
-      sendWebhook('cry', 'Ağlıyor — Test', 87);
-    }
+    function testAlert() { showToast('🚨 ' + babyName + ' — Genel Ağlama', 'Test bildirimi', 'alert'); sendWebhook('cry', 'Ağlıyor — Test', 87); }
 
-    /* ─── WEBHOOK GÖNDER ────────────────────────────── */
     function sendWebhook(cls, label, pct) {
       if (!webhookUrl) return;
-      const payload = {
-        baby_name: babyName,
-        event: cls,
-        label: label,
-        confidence: pct,
-        timestamp: new Date().toISOString(),
-        source: 'bebesebes_dashboard'
-      };
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(() => {}); // Sessizce hata yut (CORS vb.)
+      fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baby_name: babyName, event: cls, label: label, confidence: pct, timestamp: new Date().toISOString() }) }).catch(() => {});
     }
 
-    function saveWebhook() {
-      webhookUrl = document.getElementById('webhook-url').value;
-      localStorage.setItem('bebesebes_webhook', webhookUrl);
-      showToast('Webhook kaydedildi', webhookUrl || '(boş)', 'info');
-    }
+    function saveWebhook() { webhookUrl = document.getElementById('webhook-url').value; localStorage.setItem('bebesebes_webhook', webhookUrl); showToast('Kaydedildi', '', 'info'); }
+    function testWebhook() { testAlert(); }
 
-    function testWebhook() {
-      if (!webhookUrl) {
-        showToast('Webhook URL girilmedi', 'Önce bir URL ekle', 'warn');
-        return;
-      }
-      sendWebhook('test', 'Webhook Test', 100);
-      showToast('Test gönderildi', 'n8n panelini kontrol et', 'info');
-    }
-
-    /* ─── AYARLAR ───────────────────────────────────── */
-    function saveBabyName(v) {
-      babyName = v || 'Bebek';
-      localStorage.setItem('bebesebes_name', babyName);
-    }
-    function saveApiUrl(v) {
-      apiUrl = v || '';
-      localStorage.setItem('bebesebes_api', apiUrl);
-    }
-    function updateNotifPrefs() {
-      notifPrefs.cry    = document.getElementById('toggle-cry').checked;
-      notifPrefs.hungry = document.getElementById('toggle-hungry').checked;
-      notifPrefs.pain   = document.getElementById('toggle-pain').checked;
-      notifPrefs.calm   = document.getElementById('toggle-calm').checked;
-      notifPrefs.night  = document.getElementById('toggle-night').checked;
-    }
-
-    /* ─── ERİŞİLEBİLİRLİK ──────────────────────────── */
-    function applyReduceMotion(el) {
-      document.documentElement.style.setProperty(
-        '--motion', el.checked ? '0.001ms' : '');
-      if (el.checked) {
-        const style = document.getElementById('reduce-motion-style') || document.createElement('style');
-        style.id = 'reduce-motion-style';
-        style.textContent = '*, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }';
-        document.head.appendChild(style);
-      } else {
-        document.getElementById('reduce-motion-style')?.remove();
-      }
-    }
-    function applyHighContrast(el) {
-      if (el.checked) {
-        document.documentElement.style.setProperty('--subtle','#cbd5e0');
-        document.documentElement.style.setProperty('--muted','#718096');
-        document.documentElement.style.setProperty('--text','#ffffff');
-        document.documentElement.style.setProperty('--accent','#34d399');
-      } else {
-        document.documentElement.style.removeProperty('--subtle');
-        document.documentElement.style.removeProperty('--muted');
-        document.documentElement.style.removeProperty('--text');
-        document.documentElement.style.removeProperty('--accent');
-      }
-    }
-
-    /* ─── YARDIMCI FONKSİYONLAR ─────────────────────── */
-    function announce(msg) {
-      const sr = document.getElementById('sr-announce');
-      sr.textContent = '';
-      setTimeout(() => { sr.textContent = msg; }, 50);
-    }
-    function isNightTime() {
-      const h = new Date().getHours();
-      return h >= 22 || h < 7;
-    }
-    function togglePill(btn) {
-      const active = btn.classList.toggle('active');
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    }
+    function saveBabyName(v) { babyName = v || 'Bebek'; localStorage.setItem('bebesebes_name', babyName); }
+    function saveApiUrl(v) { apiUrl = v || ''; localStorage.setItem('bebesebes_api', apiUrl); }
+    function updateNotifPrefs() { notifPrefs.cry = document.getElementById('toggle-cry').checked; notifPrefs.hungry = document.getElementById('toggle-hungry').checked; notifPrefs.pain = document.getElementById('toggle-pain').checked; }
+    function togglePill(btn) { btn.classList.toggle('active'); }
   </script>
 </body>
 </html>
