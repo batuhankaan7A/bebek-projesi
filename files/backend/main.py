@@ -1,7 +1,5 @@
 """
-BebeSes – FastAPI Backend
-Deploy: Render.com veya Railway.app
-Model: bebek_uyku_modeli.h5  |  Etiketler: classes.npy
+BebeSes – FastAPI Backend (DÜZELTİLMİŞ ÇİFT ÇIKTILI VERSİYON)
 """
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -13,104 +11,101 @@ import os
 import tempfile
 from datetime import datetime
 
-# ─── TENSORFLOW VE YAMNET YÜKLEME ──────────────────────
+# Konsol uyarılarını gizle (test_et.py'deki gibi)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 try:
     import tensorflow as tf
     import tensorflow_hub as hub
     
-    # 1. Kendi Eğittiğin Modeli Yükle
     MODEL_PATH  = os.getenv("MODEL_PATH", "bebek_uyku_modeli.h5")
     LABELS_PATH = os.getenv("LABELS_PATH", "classes.npy")
     model  = tf.keras.models.load_model(MODEL_PATH)
     labels = list(np.load(LABELS_PATH, allow_pickle=True))
     
-    # 2. YAMNet Özellik Çıkarıcıyı Yükle
     print("YAMNet Özellik Çıkarıcı Yükleniyor...")
     yamnet_model = hub.load('https://tfhub.dev/google/yamnet/1')
     
     MODEL_LOADED = True
-    print(f"✅ Model yüklendi: {MODEL_PATH}")
-    print(f"✅ Sınıflar: {labels}")
+    print("✅ Model ve YAMNet başarıyla yüklendi!")
 except Exception as e:
-    print(f"⚠️  Model yüklenemedi ({e}). Mock mod aktif.")
+    print(f"⚠️ Model yüklenemedi: {e}")
     MODEL_LOADED = False
     labels = ["calm", "sleep", "hungry", "cry", "pain"]
 
-# ─── APP ─────────────────────────────────────────────
-app = FastAPI(
-    title="BebeSes API",
-    description="Bebek ses analiz API'si — YAMNet + Çift Çıktılı bebek_uyku_modeli.h5",
-    version="1.0.0"
-)
-
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+app = FastAPI(title="BebeSes API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ─── YARDIMCI FONKSİYONLAR ────────────────────────────
-def extract_yamnet_features(file_path: str) -> np.ndarray:
-    """YAMNet ile ses dosyasından özellikleri çıkar"""
+def load_and_resample_audio(file_path):
+    """Sesi YAMNet'in istediği 16000 Hz formata getirir (test_et.py'deki fonksiyon)"""
     audio_numpy, sr = librosa.load(file_path, sr=16000, mono=True)
-    wav_data = tf.convert_to_tensor(audio_numpy, dtype=tf.float32)
-    scores, embeddings, spectrogram = yamnet_model(wav_data)
-    
-    mean_embedding = tf.reduce_mean(embeddings, axis=0).numpy()
-    features = np.expand_dims(mean_embedding, axis=0) # (1, 1024)
-    return features
+    audio = tf.convert_to_tensor(audio_numpy, dtype=tf.float32)
+    return audio
 
-# ─── ROUTE'LAR ────────────────────────────────────────
-@app.get("/", tags=["Genel"])
+@app.get("/")
 def root():
-    return {"service": "BebeSes API", "status": "ok", "model_loaded": MODEL_LOADED}
+    return {"status": "ok", "message": "BebeSes API Çalışıyor"}
 
-@app.post("/predict/audio", tags=["Tahmin"])
+@app.post("/predict/audio")
 async def predict_audio(ses_dosyasi: UploadFile = File(...)):
-    contents = await ses_dosyasi.read()
-    if len(contents) < 100:
-        raise HTTPException(status_code=400, detail="Ses dosyası çok küçük veya boş.")
-
     if not MODEL_LOADED:
         raise HTTPException(status_code=500, detail="Model yüklü değil.")
 
+    contents = await ses_dosyasi.read()
+    if len(contents) < 100:
+        raise HTTPException(status_code=400, detail="Ses dosyası çok küçük.")
+
+    # Gelen sesi geçici bir dosyaya kaydet (librosa okuyabilsin diye)
     with tempfile.NamedTemporaryFile(delete=False, suffix=".webm") as temp_audio:
         temp_audio.write(contents)
         tmp_path = temp_audio.name
 
     try:
-        # 1. YAMNet Özellik Çıkarımı
-        features = extract_yamnet_features(tmp_path)
+        # 1. Özellik Çıkarımı (YAMNet)
+        wav_data = load_and_resample_audio(tmp_path)
+        scores, embeddings, spectrogram = yamnet_model(wav_data)
         
-        # 2. Model Tahmini - İŞTE DÜZELTİLEN YER BURASI (ÇİFT ÇIKTI)
+        if embeddings.shape[0] == 0:
+            raise Exception("Sesten özellik çıkarılamadı.")
+            
+        mean_embedding = tf.reduce_mean(embeddings, axis=0).numpy()
+        features = np.expand_dims(mean_embedding, axis=0) # (1, 1024)
+        
+        # 2. Model Tahmini (ÇİFT ÇIKTI) - İŞTE KRİTİK NOKTA!
         cry_pred, reason_pred = model.predict(features, verbose=0)
         
-        # Sadece 9'lu sınıfın (nedenlerin) yüzdelerini alıyoruz
+        # Ağlama durumu
+        crying_probability = float(cry_pred[0][0])
+        is_crying = bool(crying_probability > 0.5)
+        
+        # Detaylı İhtimaller (9 sınıf)
         preds = reason_pred[0]
-        idx = int(np.argmax(preds))
+        en_yuksek_idx = int(np.argmax(preds))
+        en_olasi_neden = labels[en_yuksek_idx]
         
-        is_crying = bool(cry_pred[0][0] > 0.5)
+        # Olasılıkları sözlük yapısına çevir (Ön yüz için)
+        probs_dict = {str(label): float(prob) for label, prob in zip(labels, preds)}
         
-        os.remove(tmp_path)
+        os.remove(tmp_path) # Temizlik
         
         return {
-            "label":         labels[idx],
-            "confidence":    round(float(preds[idx]), 4),
-            "probabilities": {l: round(float(p), 4) for l, p in zip(labels, preds)},
-            "is_crying":     is_crying,
-            "cry_prob":      round(float(cry_pred[0][0]), 4),
-            "timestamp":     datetime.utcnow().isoformat()
+            "label": en_olasi_neden, # Frontend bunu "tahmini_neden" olarak bekliyor olabilir
+            "tahmini_neden": en_olasi_neden, # Garanti olsun diye iki isimle de gönderiyoruz
+            "confidence": float(preds[en_yuksek_idx]),
+            "neden_olasiligi": float(preds[en_yuksek_idx]) * 100,
+            "is_crying": is_crying,
+            "cry_prob": crying_probability,
+            "probabilities": probs_dict
         }
+        
     except Exception as e:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
-        raise HTTPException(status_code=500, detail=f"Analiz hatası: {str(e)}")
-
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", 8000))
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+        raise HTTPException(status_code=500, detail=f"Hata: {str(e)}")
