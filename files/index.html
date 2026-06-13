@@ -882,7 +882,7 @@
     }
 
     function mapBackendDataToFrontend(data) {
-      const backendClass = data.tahmini_neden;
+      const backendClass = data.label;
       let frontendClass = 'calm';
 
       if (backendClass === 'bellypain') frontendClass = 'pain';
@@ -891,7 +891,7 @@
       else if (backendClass === 'silence' || backendClass === 'laugh' || backendClass === 'noise') frontendClass = 'calm';
       else frontendClass = 'cry';
 
-      const confidence = data.neden_olasiligi / 100;
+      const confidence = data.confidence;
       
       let probs = {calm: 0, sleep: 0, hungry: 0, cry: 0, pain: 0};
       probs[frontendClass] = confidence;
